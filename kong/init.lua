@@ -605,6 +605,8 @@ end
 
 
 function Kong.preread()
+  kong.worker_events.poll()
+
   local ctx = ngx.ctx
   if not ctx.KONG_PROCESSING_START then
     ctx.KONG_PROCESSING_START = get_now_ms()
@@ -660,6 +662,8 @@ end
 
 
 function Kong.rewrite()
+  kong.worker_events.poll()
+
   local proxy_mode = var.kong_proxy_mode
   if proxy_mode == "grpc" or proxy_mode == "unbuffered"  then
     kong_resty_ctx.apply_ref() -- if kong_proxy_mode is gRPC/unbuffered, this is executing
@@ -1164,6 +1168,14 @@ end
 
 
 function Kong.log()
+  ngx.timer.at(0, function(premature)
+    if premature then
+      return
+    end
+
+    kong.worker_events.poll()
+  end)
+
   local ctx = ngx.ctx
   if not ctx.KONG_LOG_START then
     ctx.KONG_LOG_START = get_now_ms()
