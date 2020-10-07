@@ -1470,8 +1470,6 @@ return {
         end
         -- release the handle, so the balancer can update its statistics
         balancer_data.balancer_handle:release()
-
-        singletons.worker_events.poll()
       end
     end
   }
