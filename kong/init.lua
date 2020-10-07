@@ -921,6 +921,7 @@ function Kong.balancer()
         balancer.report_http_status(balancer_data.balancer_handle,
                                     previous_try.code)
       end
+      singletons.worker_events.poll()
     end
 
     local ok, err, errcode = balancer_execute(balancer_data)

@@ -333,6 +333,7 @@ do
         if err then
           log(ERR, "[healthchecks] failed reporting status: ", err)
         end
+        singletons.worker_events.poll()
       end
 
       balancer.report_tcp_failure = function(handle)
@@ -342,6 +343,7 @@ do
         if err then
           log(ERR, "[healthchecks] failed reporting status: ", err)
         end
+        singletons.worker_events.poll()
       end
 
       balancer.report_timeout = function(handle)
@@ -352,6 +354,7 @@ do
           log(ERR, "[healthchecks] failed reporting status: ", err)
         end
       end
+      singletons.worker_events.poll()
     end
 
 
