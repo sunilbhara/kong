@@ -155,7 +155,7 @@ do
       local ok, data = reader()
       if not ok then
         c:setkeepalive()
-        return nil, data
+        return nil, "no data"
       end
 
       if data[1] == 2 then
@@ -394,9 +394,7 @@ do
     while instance_info and not instance_info.id do
       -- some other thread is already starting an instance
       ngx.sleep(0)
-      if not instances[key] then
-        break
-      end
+      instance_info = instances[key]
     end
 
     if instance_info
