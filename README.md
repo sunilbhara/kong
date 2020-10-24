@@ -11,7 +11,7 @@ high performance and extensibility.
 
 Actively maintained, Kong is widely used in production at companies ranging
 from startups to Global 5000 as well as government organizations.
-
+//kong is such a amazing application
 [Installation](https://konghq.com/install) |
 [Documentation](https://docs.konghq.com) |
 [Forum](https://discuss.konghq.com) |
